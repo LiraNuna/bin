@@ -1,0 +1,4 @@
+#!/bin/bash
+term="$1"
+shift
+grep --color=always -E "$|$term" $@ | less -FXR
