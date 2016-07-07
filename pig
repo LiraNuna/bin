@@ -73,7 +73,10 @@ if __name__ == "__main__":
         exit(1)
 
     if not args.files:
-        process_contents(sys.stdin.read(), lexer)
+        try:
+            process_contents(sys.stdin.read(), lexer)
+        except KeyboardInterrupt:
+            exit(130)
     else:
         for filename in args.files:
             process(filename, lexer)
