@@ -1,0 +1,14 @@
+#!/bin/bash
+
+wid=$(xwininfo  |grep 'Window id:' |cut -d" " -f4)
+pid=$(xprop -id "$wid" |grep "^_NET_WM_PID" | cut -d" " -f3)
+
+echo $pid |grep '^ *[0-9][0-9]* *$' && exit 0
+
+cat <<EOF 1>&2
+xpid ERROR: can't get PID for selected window.
+            window ID:   $wid
+            pid: $pid
+EOF
+exit 1
+
